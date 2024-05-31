@@ -35,16 +35,17 @@ def data_spilt():
         # 读取CSV文件
         df = pd.read_csv(uploaded_file1)
         df_index = df.index.values
-        t_start = datetime.datetime.strptime(df.loc[0, 'DateTime'], '%Y-%m-%d %H:%M:%S').timestamp()
-        t_end = datetime.datetime.strptime(df.loc[df_index[-1], 'DateTime'], '%Y-%m-%d %H:%M:%S').timestamp()
+        print(df.columns.tolist()[0])
+        t_start = datetime.datetime.strptime(df.loc[0, df.columns.tolist()[0]], '%Y-%m-%d %H:%M:%S').timestamp()
+        t_end = datetime.datetime.strptime(df.loc[df_index[-1], df.columns.tolist()[0]], '%Y-%m-%d %H:%M:%S').timestamp()
 
-        data_col1, data_col2 = st.columns(2)
-        with data_col1:
-            st.subheader("头部数据预览")
-            st.write(df.head())
-        with data_col2:
-            st.subheader("尾部数据预览")
-            st.write(df.tail())
+        # data_col1, data_col2 = st.columns(2)
+        # with data_col1:
+        #     st.subheader("头部数据预览")
+        #     st.write(df.head())
+        # with data_col2:
+        #     st.subheader("尾部数据预览")
+        #     st.write(df.tail())
     else:
         df = pd.DataFrame([])
 
