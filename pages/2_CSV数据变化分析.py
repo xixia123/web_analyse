@@ -45,25 +45,20 @@ def data_plotly():
             x_column = st.selectbox("选择 X 列", df.columns)
         with choose_col_2:
             y1_columns = st.multiselect("选择 Y1 列", df.columns,
-                                        # default=st.session_state['y1_columns'],
                                         on_change=get_y1_column, key='y1_columns')
         with choose_col_3:
             y2_columns = st.multiselect("选择 Y2 列", df.columns,
-                                        # default=st.session_state['y2_columns'],
                                         on_change=get_y2_column, key='y2_columns')
         col_11, col_12, col_13 = st.columns(3)
         with col_11:
-            # del_name = st.text_input('删除数据的列名')
             del_zero_rows = st.checkbox('删除数据中包含0的行', value=False)
             if del_zero_rows:
                 del_name = st.multiselect('删除数据的列名', df.columns, on_change=get_y1_column(), key='del_name',
                                         label_visibility='collapsed')
-                # st.write(del_name)
 
                 for c in del_name:
                     df = df[df[c] != 0]
-                # st.write(df.size)
-                
+
         if plot_type == 'bar':
             pass
         elif plot_type == 'scatter':
