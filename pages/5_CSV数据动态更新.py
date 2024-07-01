@@ -24,10 +24,8 @@ def get_y2_column():
 
 
 if __name__ == "__main__":
-    st.set_page_config(page_title="折线图分析-数据处理分析工具", layout="wide")
-    # count = st_autorefresh(1000, limit=None, key='test')
-    # print(count)
-    st.header("数据变化趋势分析")
+    st.set_page_config(page_title="数据处理分析工具", layout="wide")
+    st.header("恒温槽温度监测")
     # 上传CSV文件
     st.subheader("读取CSV文件")
     uploaded_file = st.file_uploader("上传CSV文件", type=["csv"], label_visibility='collapsed')
@@ -60,10 +58,10 @@ if __name__ == "__main__":
 
             show_markers = st.checkbox("显示数据点", value=True)
             max_size = df.index.size
-            if max_size<=120:
+            if max_size <= 120:
                 pass
             else:
-                df = df.iloc[max_size-121::]
+                df = df.iloc[max_size - 121::]
 
         if y1_columns and y2_columns:
             # 创建一个新的图形对象
@@ -126,7 +124,7 @@ if __name__ == "__main__":
                 df = pd.read_csv(data_file)
                 # print(df.index.size)
                 max_size = df.index.size
-                if max_size<=120:
+                if max_size <= 120:
                     for i in range(len(y_all_columns)):
                         fig.data[i].x = df[x_column]
                         fig.data[i].y = df[y_all_columns[i]]
@@ -136,27 +134,10 @@ if __name__ == "__main__":
                     for i in range(len(y_all_columns)):
                         fig.data[i].x = df[x_column][data_index]
                         fig.data[i].y = df[y_all_columns[i]][data_index]
-                fig.update_layout(autosize=False,width=1250, height=500,)
+                fig.update_layout(autosize=False, width=1250, height=500, )
                 plotly_figure.write(fig)
                 count += 1
                 print(count)
                 time.sleep(1)
         else:
             st.warning("请选择至少两列作为 Y1 和 Y2 列进行图表绘制。")
-
-        # y_all_columns = y1_columns + y2_columns
-        # count = 1
-        # print(x_column)
-        # while True:
-        #     df = pd.read_csv(data_file)
-        #     # print(df.index.size)
-        #     max_size = df.index.size
-        #     data_index = list(range(max_size-121,max_size))
-        #     # print(data_index)
-        #     for i in range(len(y_all_columns)):
-        #         fig.data[i].x = df[x_column][data_index]
-        #         fig.data[i].y = df[y_all_columns[i]][data_index]
-        #     plotly_figure.write(fig)
-        #     count += 1
-        #     print(count)
-        #     time.sleep(1)

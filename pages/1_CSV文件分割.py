@@ -112,5 +112,5 @@ def data_spilt():
                                use_container_width=True)
 
 
-st.set_page_config(page_title="数据分割-数据处理分析工具", layout="wide")
+st.set_page_config(page_title="数据处理分析工具", layout="wide")
 data_spilt()
